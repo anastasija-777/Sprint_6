@@ -1,60 +1,58 @@
-import pytest
 import allure
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions
-from selenium.webdriver.support.wait import WebDriverWait
 from pages.basa_page import BasaPage
-
-
+from locators.order_page_rental_locator import OrderPageRentalLocators
 
 class OrderPageRental(BasaPage):
 
-    def choice_when_to_bring_scooter(self,locator_cd,locator_d):  # выбор даты аренды
+    @allure.step('Находим поле "Когда привезти самокат" и выбираешь дату {rental_data}')
+    def choice_when_to_bring_scooter(self,locator_cd,rental_data):  # выбор даты аренды
         self.find_element_with_wait(locator_cd).click()
-        self.find_element_with_wait(locator_d).click()
+        self.find_element_with_wait(rental_data).click()
 
-    def choice_rental_period(self,locator_cp,locator_s):  # выбор срока аренды
+    @allure.step('Находим поле "Срок аренды" и выбираешь срок {rental_period}')
+    def choice_rental_period(self,locator_cp,rental_period):  # выбор срока аренды
         self.click_on_element(locator_cp)
-        element = self.find_element_with_wait(locator_s)
-        self.driver.execute_script("arguments[0].scrollIntoView()", element)
-        element.click()
+        self.scroll_to_element(rental_period)
+        self.click_on_element(rental_period)
 
-    def choice_color_scooter(self,locator_cc,locator_c):   # выбор цвета самоката
+    @allure.step('Находим поле "Цвет самоката" и выбираешь цвет {color}')
+    def choice_color_scooter(self,locator_cc,color):   # выбор цвета самоката
         self.find_element_with_wait(locator_cc)
-        self.click_on_element(locator_c)
+        self.click_on_element(color)
 
+    @allure.step('Находим поле Комментарий и пишешь комментарий {comment}')
     def input_comment(self,locator_ic,comment):
         self.click_on_element(locator_ic)
         self.find_element_with_wait(locator_ic).send_keys(comment)
 
+    @allure.step('Находим кнопку Заказать и кликаешь по ней')
     def button_order(self,locator_o):
         self.click_on_element(locator_o)
 
     @allure.step('Заполняем форму заказа "Про аренду" и кликаем по кнопке Заказать')
-    def order_page_rental(self,locator_cd,locator_d,locator_cp,locator_s,locator_cc,locator_c,locator_ic,comment,locator_o):
-        self.choice_when_to_bring_scooter(locator_cd,locator_d)
-        self.choice_rental_period(locator_cp,locator_s)
-        self.choice_color_scooter(locator_cc, locator_c)
-        self.input_comment(locator_ic, comment)
-        self.button_order(locator_o)
+    def order_page_rental(self,rental_data,rental_period,color,comment):
+        self.choice_when_to_bring_scooter(OrderPageRentalLocators.CHOICE_DATE_LOCATOR,rental_data)
+        self.choice_rental_period(OrderPageRentalLocators.CHOICE_RENTAL_PERIOD_LOCATOR,rental_period)
+        self.choice_color_scooter(OrderPageRentalLocators.CHOICE_COLOR_SCOOTER_LOCATOR, color)
+        self.input_comment(OrderPageRentalLocators.INPUT_COMMENT_LOCATOR, comment)
+        self.button_order(OrderPageRentalLocators.BUTTON_ORDER_LOCATOR)
 
-    @allure.step('Переходим на следующую страницу {url} заполнения формы')
-    def page_form_order_rental(self, locator, url):
-        self.find_element_with_wait_url(locator, url)
+    @allure.step('Переходим на следующую страницу заполнения формы "Про аренду"')
+    def page_form_order_rental(self):
+        self.find_element_with_wait(OrderPageRentalLocators.CHOICE_DATE_LOCATOR)
 
     @allure.step('В всплывающем окне "Хотите оформить заказ?" кликаем по кнопке Да')
-    def click_button_yes(self,locator):
-        self.click_on_element(locator)
+    def click_button_yes(self):
+        self.click_on_element(OrderPageRentalLocators.BUTTON_YES_LOCATOR)
 
     @allure.step('Проверяем что заказ успешно оформлен')
-    def check_successful_order(self,locator):
-        element = self.find_element_with_wait(locator)
+    def check_successful_order(self):
+        element = self.find_element_with_wait(OrderPageRentalLocators.TEXT_ORDER_LOCATOR)
         text = element.text[0:14]
         assert  text == 'Заказ оформлен'
 
     @allure.step('В всплывающем окне "Заказ оформлен" кликаем по кнопке "Посмотреть статус')
-    def click_button_view_status(self, locator):
-        self.click_on_element(locator)
+    def click_button_view_status(self):
+        self.click_on_element(OrderPageRentalLocators.BUTTON_VIEW_STATUS_LOCATOR)
 
 
