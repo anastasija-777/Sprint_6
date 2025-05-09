@@ -36,7 +36,7 @@ class TestOrderScooter:
         # в всплывающем окне "Заказ оформлен" кликаем по кнопке "Посмотреть статус'
         order_page_rental.click_button_view_status()
         # проверяем что при клике на логотип «Самоката» попадаем на главную страницу «Самоката».
-        main_page.check_click_logo_scooter_skip_main_page()
+        order_page_rental.check_click_logo_scooter_skip_main_page()
 
         # проверяем что при кликаем на логотип Яндекса происходит переход на главную страницу Дзена
         main_page.check_click_logo_yandex_skip_dzen()
@@ -76,7 +76,7 @@ class TestOrderScooter:
         # в всплывающем окне "Заказ оформлен" кликаем по кнопке "Посмотреть статус'
         order_page_rental.click_button_view_status()
         # проверяем что при клике на логотип «Самоката» попадаем на главную страницу «Самоката».
-        main_page.check_click_logo_scooter_skip_main_page()
+        order_page_rental.check_click_logo_scooter_skip_main_page()
 
         # проверяем что при кликаем на логотип Яндекса происходит переход на главную страницу Дзена
         main_page.check_click_logo_yandex_skip_dzen()

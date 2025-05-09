@@ -1,8 +1,9 @@
 import allure
-from pages.basa_page import BasaPage
+from pages.base_page import BasePage
 from locators.order_page_rental_locator import OrderPageRentalLocators
+from data import URL
 
-class OrderPageRental(BasaPage):
+class OrderPageRental(BasePage):
 
     @allure.step('Находим поле "Когда привезти самокат" и выбираешь дату {rental_data}')
     def choice_when_to_bring_scooter(self,locator_cd,rental_data):  # выбор даты аренды
@@ -54,5 +55,15 @@ class OrderPageRental(BasaPage):
     @allure.step('В всплывающем окне "Заказ оформлен" кликаем по кнопке "Посмотреть статус')
     def click_button_view_status(self):
         self.click_on_element(OrderPageRentalLocators.BUTTON_VIEW_STATUS_LOCATOR)
+
+    @allure.step('Кликаем на логотип «Самоката»')
+    def click_logo_scooter(self):
+        self.click_on_element(OrderPageRentalLocators.LOGO_SCOOTER_LOCATOR)
+
+    @allure.step('Проверяем что при кликаем на логотип «Самоката» происходит переход на главную страницу Самоката')
+    def check_click_logo_scooter_skip_main_page(self):
+        self.click_logo_scooter()
+        self.check_url(URL.main_url)
+
 
 

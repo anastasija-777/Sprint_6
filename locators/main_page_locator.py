@@ -21,7 +21,7 @@ class MainPageLocators:
     BUTTON_COOKIE_LOCATOR = By.CLASS_NAME,'App_CookieButton__3cvqF'
     BUTTON_ORDER_IN_HEADER_LOCATOR = By.CLASS_NAME,'Button_Button__ra12g'
     BUTTON_ORDER_AFTER_STATUSES_LOCATOR = By.XPATH, './/div[@class = "Home_FinishButton__1_cWm"]'
-
+    YANDEX_LOCATOR = By.XPATH, './/img[@alt="Yandex"]'
 
 
 

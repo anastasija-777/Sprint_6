@@ -1,10 +1,10 @@
 import allure
-from pages.basa_page import BasaPage
+from pages.base_page import BasePage
 from locators.order_page_for_whom_locator import OrderPageForWhomLocators
 from data import URL
 
 
-class OrderPageForWhom(BasaPage):
+class OrderPageForWhom(BasePage):
 
     @allure.step('Находим поле Имя и указываем {name}')
     def input_name(self, locator_n,name):  # заполнение поля Имя

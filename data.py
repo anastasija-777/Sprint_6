@@ -2,8 +2,8 @@ from locators.order_page_for_whom_locator import OrderPageForWhomLocators
 from locators.order_page_rental_locator import OrderPageRentalLocators
 
 class URL:
-    basa_url = 'https://qa-scooter.praktikum-services.ru/'
-    order_url = basa_url+'order'
+    main_url = 'https://qa-scooter.praktikum-services.ru/'
+    order_url = main_url+'order'
     dzen_url = 'https://dzen.ru/'
 
 

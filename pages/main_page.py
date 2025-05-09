@@ -1,9 +1,10 @@
 import allure
-from pages.basa_page import BasaPage
+from pages.base_page import BasePage
 from locators.main_page_locator import MainPageLocators
+from data import URL
 
 
-class MainPage(BasaPage):
+class MainPage(BasePage):
 
     @allure.step('Находим вопрос,кликаем и получаем ответ')
     def click_to_question_and_get_answer(self,locator_q,locator_a):
@@ -29,3 +30,14 @@ class MainPage(BasaPage):
     @allure.step('Кликаем по кнопке "Заказать" под статусами')
     def click_button_after_statuses(self):
         self.click_on_element(MainPageLocators.BUTTON_ORDER_AFTER_STATUSES_LOCATOR)
+
+    @allure.step('Кликаем на логотип Яндекса')
+    def click_logo_yandex(self):
+        self.click_on_element(MainPageLocators.YANDEX_LOCATOR)
+
+    @allure.step('Проверяем что при кликаем на логотип Яндекса происходит переход на главную страницу Дзена')
+    def check_click_logo_yandex_skip_dzen(self):
+        self.click_logo_yandex()
+        self.switch_to_new_tab_with_wait()
+        self.find_element_with_wait_contains_url(URL.dzen_url)
+        self.check_find_element_contains_url(URL.dzen_url)

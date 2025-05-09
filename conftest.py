@@ -9,7 +9,6 @@ from pages.main_page import MainPage
 from locators.main_page_locator import MainPageLocators
 from pages.order_page_for_whom import OrderPageForWhom
 from pages.order_page_rental import OrderPageRental
-from pages.basa_page import BasaPage
 
 @allure.step('Создаем драйвер Firefox и после выполнения всей действий закрываем браузер')
 @pytest.fixture(scope='function')
@@ -18,10 +17,10 @@ def driver():
     yield driver
     driver.quit()
 
-@allure.step('Открываем страницу {URL.basa_url}')
+@allure.step('Открываем страницу {URL.main_url}')
 @pytest.fixture(scope='function')
 def open(driver):
-    driver.get(URL.basa_url)
+    driver.get(URL.main_url)
 
 @allure.step('Создаем объект главной страницы')
 @pytest.fixture(scope='function')

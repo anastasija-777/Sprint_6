@@ -16,6 +16,6 @@ class OrderPageRentalLocators:
     BUTTON_YES_LOCATOR = By.XPATH, '//button[text()="Да"]'
     TEXT_ORDER_LOCATOR = By.XPATH, '//div[text()="Заказ оформлен"]'    # текст об успешном оформлении заказа
     BUTTON_VIEW_STATUS_LOCATOR = By.XPATH, '//button[text()="Посмотреть статус"]'
-
+    LOGO_SCOOTER_LOCATOR = By.XPATH, './/a[@class="Header_LogoScooter__3lsAR"]'
 
 
